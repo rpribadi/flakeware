@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load tagging_tags %}
+
+{% block content %}
+  
+	{% tags_for_object project as tag_list %}
+	<div class="entries">
+	    <h2><a href="{% url project_index %}">Project Journal</a> : <a href="{{ project.get_absolute_url }}"><span class="blue">{{ project.title }}</span></a></h2>
+	    <h4>
+	    	Posted by <a href="http://flakeware.com">{{project.author.first_name}} {{project.author.last_name}}</a> 
+			| 
+			{{project.publish|date:"F d, Y P"}} 
+			| 
+			Tagged under   
+				{% if tag_list %}
+					{% for tag in tag_list %}
+					<a href="{% url project_tag_detail tag|slugify %}">{{ tag }}</a>
+					{% endfor %}
+					</p>
+				{% endif %} 
+		</h4>	
+	  	<div class="body">
+	    	{{ project.body|safe }}
+	  	</div>
+    </div>
+	
+
+    <h3 class='comments_title'>Project Logs</h3>
+	<ul class="logs">
+	    {% for log in log_list %}
+		<li>
+            <h3><a href="#log-{{log.id}}" title="read more"/>{{log.title}}</a></h3>
+		    <p>{{log.created|date:"F d, Y P"}}</p>
+            <div id="log-{{log.id}}" class="hide">
+                {{log.body|safe}}
+            </div>
+		</li>
+        {% endfor %}
+	</ul>
+    
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("ul.logs > li > h3 > a").each(function(){
+                $(this).click(function(e){
+                    e.preventDefault();
+                    id = $(this).attr('href');
+                    $(id).slideToggle('normal');;
+                })
+            });
+        });
+    </script>
+{% endblock %}

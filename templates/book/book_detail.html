@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load tagging_tags %}
+
+{% block content %}
+  
+	{% tags_for_object book as tag_list %}
+	<div class="entries">
+	    <h2><a href="{% url book_index %}">Books</a> : <a href="{{ book.get_absolute_url }}"><span class="blue">{{ book.title }}</span></a></h2>
+	    <h4>
+	    	Posted by <a href="http://flakeware.com">{{book.author.first_name}} {{book.author.last_name}}</a> 
+			| 
+			{{book.publish|date:"F d, Y P"}} 
+			| 
+			Tagged under   
+				{% if tag_list %}
+					{% for tag in tag_list %}
+					<a href="{% url book_tag_detail tag|slugify %}">{{ tag }}</a>
+					{% endfor %}
+					</p>
+				{% endif %} 
+		</h4>	
+	  	<div class="body">
+	    	{{ book.body|safe }}
+	  	</div>
+    </div>
+	
+    
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Post archive{% endblock %}
+{% block body_class %}{{ block.super }} post_list{% endblock %}
+
+
+{% block content_title %}
+	{% if content_title %}
+  	<h2>{{content_title|safe}}</h2>
+	{% endif %}
+{% endblock %}
+
+{% load tagging_tags comments %}
+
+{% block content %}
+	{% for post in object_list %}    
+	{% tags_for_object post as tag_list %}
+	{% get_comment_count for post as comment_count %}
+	<div class="entries">
+	    <h2><a href="{{ post.get_absolute_url }}"><span class="blue">{{ post.title }}</span></a>{{title}}</h2>
+	    <h4>
+	    	Posted by <a href="http://flakeware.com">{{post.author.first_name}} {{post.author.last_name}}</a> 
+			| 
+			{{post.publish|date:"F d, Y P"}} 
+			| 
+			Tagged under   
+				{% if tag_list %}
+					{% for tag in tag_list %}
+					<a href="{% url blog_tag_detail tag|slugify %}">{{ tag }}</a>
+					{% endfor %}
+				{% endif %} 
+			| 
+			{{comment_count}} comment(s)
+		</h4>	
+		{{post.tease|safe}}
+	    <p class="more"><a href="{{ post.get_absolute_url }}">Read more</a></p>
+    </div>
+	{% endfor %}
+
+  
+  {% if is_paginated %}
+  <p class="pagination">
+    {% if has_next %}
+    <a class="older" href="?page={{ next }}">Older Posts</a>
+    {% endif %}
+    {% if has_next and has_previous %} | {% endif %}
+    {% if has_previous %}
+    <a class="newer" href="?page={{ previous }}">Newer Posts</a>
+    {% endif %}
+  </p>
+  {% endif %}
+{% endblock %}

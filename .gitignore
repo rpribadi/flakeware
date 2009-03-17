@@ -1,0 +1,7 @@
+*.pyc
+.svn
+*~
+.project
+.pydevproject
+media/uploads/*
+

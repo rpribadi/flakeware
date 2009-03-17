@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="author" content="Riki Pribadi" />    
+    <meta name="copyright" content="Copyright (c) 2008 Flakeware.com" />
+    <meta name="robots" content="noarchive, nofollow">
+    <meta name="description" content="It's not everything about the world. It is something about me.">
+    <meta name="keywords" content="flakeware, django, riki, pribadi, riki pribadi">
+    <meta name="language" content="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<link rel="shortcut icon" type="image/ico" href="{{MEDIA_URL}}images/favicon.ico" />
+    {% load compressed %}
+    {% compressed_css 'main_css' %}
+    {% compressed_css 'syntaxhighlighter_css' %}
+	<title>Flakeware</title>
+</head>
+<body>
+    {% load thumbnail %}
+	{% load blog %} 
+    {% load project %}
+    {% load book %}
+    
+	<div id="content">
+		<div id="logo">
+			<h1><span class="blue">Flake</span>Ware</h1>
+		</div>
+		<ul id="menu">
+			<li><a href="/">Home</a></li>
+			<li><a href="{% url project_index %}">Projects</a></li>
+			<li><a href="{% url book_index %}">Books</a></li>
+			<li><a href="/profile/">Profile</a></li>
+		</ul>
+		<div id="intro">
+			<h2 class='line1'><span class="white">It's not everything</span> about the World</h2>
+			<br />
+			<h2 class='line2'>It is something <span class="white">about Me</span> </h2>
+
+		    <form id="searchform" action="{% url blog_search %}" method="get">
+	            <input id="searchinput" name="q" class="searchinput" value="Keywords..." onfocus="if (this.value == 'Keywords...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Keywords...';}" type="text">
+	            <input id="searchsubmit" value="" type="submit">
+            </form>
+            <div class="breadcrumb">
+                {% block breadcrumb %}
+                {% endblock %}
+            </div>
+		</div>	
+
+		<div id="left">
+			{% block content_title %}
+			{% endblock %}
+
+			{% block content %}
+			{% endblock %}
+
+            <div id="footer">
+		            <p class="right">
+                        <a href="http://www.djangoproject.com/" title="Django Framework"><img src="{{MEDIA_URL}}images/djangopowered.gif" border="0" alt="Powered by Django." title="Powered by Django." /></a>
+                    </p>
+		            <p>	<a href="/rss/" title="RSS"><img src="{{MEDIA_URL}}images/rss.gif" alt="rss" class="rss"></a> &copy; Copyright {% now "Y" %} <a href="#">FlakeWare</a>. All rights reserved. Template thanx to <a href="http://www.solucija.com" title="Solucija" rel="no-follow">Luka Cvrk</a></p>
+            </div>	
+		</div>
+	
+		<div id="right">
+		    <h2><span class="blue">About</span> The Author</h2>
+		    <div class="block">
+		        <img src="{{MEDIA_URL}}images/author.jpg" alt="riki pribadi" class="photo"/>
+		        <p>Hi, my name is <span class="blue">Riki Pribadi</span>. I'm a web developer specialized in Django/Python and PHP. Currently working for <a href="http://enzymeit.com">Enzyme IT Ltd</a> as Python/Django Developer.  And  still dreaming to be an Oracle Database Administrator one day.</p>
+		        <p class="info">You can contact me at <span class="blue">riki.pribadi [at] yahoo.com</span><br />or check out my <a href="http://linkedin.com">LinkedIn</a> profile.</p>
+	        </div>
+			
+			{% block sidebar %}
+			
+			{% get_latest_posts 10 as latest_post_list %}
+			
+		    <h2><span class="blue">Recent</span> Entries</h2>
+		    <ul class="topic">
+		    	{% for latest_post in latest_post_list %}
+		        <li>{{latest_post.publish|date:"F d, Y"}}<h3><a href="{{latest_post.get_absolute_url}}" title="{{latest_post.title}}">{{latest_post.title}}</a></h3></li>
+				{% endfor %}
+		    </ul>
+
+			{% get_latest_project 1 as working %}
+            {% if working %}
+		    <h2><span class="blue">Working</span> On</h2>
+		    <div class="block">
+		        <img src="{% thumbnail working.image 100x100 crop %}" alt="{{working.title}}" class="photo" />
+		        <h3>{{working.title}}</h3> 
+		        {{working.tease|safe}} 
+		        <p class="more"><a href="{{working.get_absolute_url}}" title="Read more about {{working.title}}">Find out more</a></p>
+	        </div>
+            {% endif %}
+            
+			{% get_latest_book 1 as book %}
+            {% if book %}
+		    <h2><span class="blue">Book </span> This Month</h2>
+		    <div class="block">
+		        <img src="{% thumbnail book.image 100x100 crop %}" alt="{{book.title}}" class="photo"/>
+		        <h3>{{book.title}}</h3> 
+                {{book.tease|safe}}
+		        <p class="more"><a href="{{book.get_absolute_url}}" title="Read more about {{book.title}}">Find out more</a></p>
+	        </div>
+            {% endif %}
+	        
+			{% endblock %}
+		</div>
+	</div>
+
+    {% compressed_js 'jquery_js' %}
+    {% compressed_js 'syntaxhighlighter_js' %}
+    
+	<script type="text/javascript">
+        $(document).ready(function(){
+            jQuery.fn.fadeToggle = function(speed, easing, callback) {
+                return this.animate({opacity: 'toggle'}, speed, easing, callback);  
+            };
+
+	        SyntaxHighlighter.config.clipboardSwf = '{{MEDIA_URL}}js/syntaxhighlighter/scripts/clipboard.swf';
+            SyntaxHighlighter.all();
+        });
+	</script>
+
+    {% block extra_js %} 
+	
+    {% endblock %}	
+
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-4435665-2");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+
+</body>
+</html>

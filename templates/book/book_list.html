@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Book archive{% endblock %}
+{% block body_class %}{{ block.super }} book_list{% endblock %}
+
+
+{% block content_title %}
+	{% if content_title %}
+  	<h2>{{content_title|safe}}</h2>
+	{% endif %}
+{% endblock %}
+
+{% load tagging_tags %}
+
+{% block content %}
+	{% for book in object_list %}    
+	{% tags_for_object book as tag_list %}
+	<div class="entries">
+	    <h2><a href="{{ book.get_absolute_url }}"><span class="blue">{{ book.title }}</span></a>{{title}}</h2>
+	    <h4>
+	    	Posted by <a href="http://flakeware.com">{{book.author.first_name}} {{book.author.last_name}}</a> 
+			| 
+			{{book.publish|date:"F d, Y P"}} 
+			| 
+			Tagged under   
+				{% if tag_list %}
+					{% for tag in tag_list %}
+					<a href="{% url book_tag_detail tag|slugify %}">{{ tag }}</a>
+					{% endfor %}
+				{% endif %} 
+		</h4>	
+		{{book.tease|safe}}
+	    <p class="more"><a href="{{ book.get_absolute_url }}">Read more</a></p>
+    </div>
+	{% endfor %}
+
+  
+  {% if is_paginated %}
+  <p class="pagination">
+    {% if has_next %}
+    <a class="older" href="?page={{ next }}">Older Books</a>
+    {% endif %}
+    {% if has_next and has_previous %} | {% endif %}
+    {% if has_previous %}
+    <a class="newer" href="?page={{ previous }}">Newer Books</a>
+    {% endif %}
+  </p>
+  {% endif %}
+{% endblock %}

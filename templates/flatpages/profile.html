@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load tagging_tags comments %}
+
+{% block content %}
+  
+<div class="entries">
+    <h2><a href="{% url project_index %}">{{flatpage.title}}</a></h2>
+    <h4>
+    	Posted by <a href="http://flakeware.com">Riki Pribadi</a> 
+		| 
+		March 17, 2009 5:32 p.m. 
+	</h4>	
+  	<div class="body">
+  	    {{flatpage.content|safe}}
+  	</div>
+
+</div>
+	
+{% endblock %}	
+			
