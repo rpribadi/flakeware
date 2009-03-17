@@ -1,7 +1,7 @@
 from django.contrib import admin
 from models import Project, Log
 from forms import ProjectForm, LogForm
-
+from django.conf import settings
 
 class ProjectAdmin(admin.ModelAdmin):
     form = ProjectForm
