@@ -10,7 +10,7 @@ def clone():
     require('project_dir',provided_by=[production])
     require('project',provided_by=[production])
     local("echo initial clone")
-    run("cd $(project_dir)/; git clone git@github.com:rpribadi/flakeware.git;")
+    run("cd $(project_dir)/; git clone git://github.com/rpribadi/flakeware.git;")
     
 def syncdb():
     require('project_dir',provided_by=[production])
