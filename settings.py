@@ -1,10 +1,7 @@
 # Django settings for cs project.
 
 import sys
-from os import path as os_path
-PROJECT_PATH = os_path.abspath(os_path.split(__file__)[0])
-
-sys.path.append(os_path.join(PROJECT_PATH, 'apps'))
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -17,9 +14,17 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'flakeware'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'root'             # Not used with sqlite3.
-DATABASE_PASSWORD = 'root'         # Not used with sqlite3.
+
+#LOCALHOST
+#DATABASE_NAME = 'flakeware'             # Or path to database file if using sqlite3.
+#DATABASE_USER = 'root'             # Not used with sqlite3.
+#DATABASE_PASSWORD = 'root'         # Not used with sqlite3.
+
+#FLAKEWARE.COM
+DATABASE_NAME = 'rpribadi_fw'             # Or path to database file if using sqlite3.
+DATABASE_USER = 'rpribadi_fw'             # Not used with sqlite3.
+DATABASE_PASSWORD = 'b1a7aefa'         # Not used with sqlite3.
+
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
@@ -42,17 +47,19 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os_path.join(PROJECT_PATH, 'media')
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/'
+MEDIA_URL = 'http://flakeware.com/media/'
+#MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/admin_media/'
+ADMIN_MEDIA_PREFIX = 'http://flakeware.com/media/admin/'
+#ADMIN_MEDIA_PREFIX = '/admin_media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'bzss94+g%(ue(l8xj57w123jftro1qo_-xhbb_aqv%2=wc96ok'
@@ -83,7 +90,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os_path.join(PROJECT_PATH, 'templates'),
+    os.path.join(os.path.dirname(__file__), 'templates')
 )
 
 INSTALLED_APPS = (
