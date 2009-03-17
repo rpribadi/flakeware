@@ -16,7 +16,7 @@ def syncdb():
     require('project_dir',provided_by=[production])
     require('project',provided_by=[production])
     local("echo sync database")
-    run("python $(project_dir)/$(project)/manage.py syncdb")
+    run("python2.5 $(project_dir)/$(project)/manage.py syncdb")
     
 def update():
     require('project_dir',provided_by=[production])
