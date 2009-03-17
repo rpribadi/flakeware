@@ -19,7 +19,7 @@ class PostAdmin(admin.ModelAdmin):
 
     class Media:
         js = [ 
-                '/media/js/jquery-1.3.2.min.js',
+                ''.join([settings.MEDIA_URL,'/media/js/jquery-1.3.2.min.js']),
              ]
 
 admin.site.register(Post, PostAdmin)

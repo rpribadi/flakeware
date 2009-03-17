@@ -1,7 +1,7 @@
 from django.contrib import admin
 from models import Book
 from forms import BookForm
-
+from django.conf import settings
 
 class BookAdmin(admin.ModelAdmin):
     form = BookForm
@@ -13,7 +13,7 @@ class BookAdmin(admin.ModelAdmin):
 
     class Media:
         js = [ 
-                '/media/js/jquery-1.3.2.min.js',
+                ''.join([settings.MEDIA_URL,'/media/js/jquery-1.3.2.min.js']),
              ]
 
 admin.site.register(Book, BookAdmin)
