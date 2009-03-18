@@ -1,5 +1,5 @@
 function DjangoFileBrowser(field_name, url, type, win) {
-    var url = "http://www.flakeware.com{% url filebrowser-index %}?pop=2&type=" + type;
+    var url = "http://flakeware.com{% url filebrowser-index %}?pop=2&type=" + type;
 
     tinyMCE.activeEditor.windowManager.open(
         {
