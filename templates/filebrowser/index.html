@@ -1,9 +1,10 @@
 {% extends "admin/base_site.html" %}
 {% load i18n %}
 {% load adminmedia %}
+{% load compressed %}
 
 {% block extrahead %}
-<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/jquery.js"></script>
+{% compressed_js 'jquery_js' %}
 {% ifequal query.pop 'pop=1' %} <!-- FileBrowseField -->
 <script language="javascript" type="text/javascript" src="{{ settings_var.URL_FILEBROWSER_MEDIA }}js/FB_FileBrowseField.js"></script>
 {% else %} <!-- TinyMCE -->
