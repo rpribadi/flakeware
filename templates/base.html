@@ -83,7 +83,7 @@
             {% if working %}
 		    <h2><span class="blue">Working</span> On</h2>
 		    <div class="block">
-		        <img src="{% thumbnail working.image 100x100 crop %}" alt="{{working.title}}" class="photo" />
+		        <img src="{{MEDIA_URL}}{{working.image}}" alt="{{working.title}}" class="photo" />
 		        <h3>{{working.title}}</h3> 
 		        {{working.tease|safe}} 
 		        <p class="more"><a href="{{working.get_absolute_url}}" title="Read more about {{working.title}}">Find out more</a></p>
@@ -94,7 +94,7 @@
             {% if book %}
 		    <h2><span class="blue">Book </span> This Month</h2>
 		    <div class="block">
-		        <img src="{% thumbnail book.image 100x100 crop %}" alt="{{book.title}}" class="photo"/>
+		        <img src="{{MEDIA_URL}}{{book.image}}" alt="{{book.title}}" class="photo"/>
 		        <h3>{{book.title}}</h3> 
                 {{book.tease|safe}}
 		        <p class="more"><a href="{{book.get_absolute_url}}" title="Read more about {{book.title}}">Find out more</a></p>

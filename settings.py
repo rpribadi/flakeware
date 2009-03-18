@@ -181,7 +181,7 @@ TINYMCE_DEFAULT_CONFIG = {
      # Theme options
     'font_size_style_values' : "12px,14px,18px,24px,36px",
     'theme_advanced_buttons1' : """paragraph, fontselect, fontsizeselect, 
-                                 forecolor, bold, italic, underline,
+                                 forecolor, bold, italic, underline, link, unlink,
                                  justifyleft, justifycenter, justifyright, 
                                  justifyfull, bullist, numlist, image, emotions, 
                                  code

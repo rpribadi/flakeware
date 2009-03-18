@@ -29,6 +29,7 @@
 					{% endfor %}
 				{% endif %} 
 		</h4>	
+        <img src="{{MEDIA_URL}}{{book.image}}" alt="{{book.title}}" />
 		{{book.tease|safe}}
 	    <p class="more"><a href="{{ book.get_absolute_url }}">Read more</a></p>
     </div>
