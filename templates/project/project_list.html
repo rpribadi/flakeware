@@ -30,7 +30,7 @@
 					{% endfor %}
 				{% endif %} 
 		</h4>	
-        <img src="{% thumbnail project.image 200x200 %}" alt="{{project.title}}" />
+        <img src="{% thumbnail project.image 175x175 %}" alt="{{project.title}}" />
 		{{project.tease|safe}}
 	    <p class="more"><a href="{{ project.get_absolute_url }}">Read more</a></p>
     </div>
