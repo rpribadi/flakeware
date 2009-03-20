@@ -39,7 +39,7 @@ h6 { color: #808080; background: inherit; font-weight: normal; font-size: .9em; 
 	#articles li a.next { background:transparent url(../images/menuarrow.jpg) no-repeat scroll center right; padding:0 8px; }
 	#articles li.last { margin: 0; float:right; text-align:right; }
 	#articles li p {padding:3px 8px;}
-#right { margin: -1px 0 0 0; padding: 10px 5px; float: right; width: 275px;  font-size: .95em; line-height:1.54em;  background: #fff;  }
+#right { margin: 0 0 0 0; padding: 10px 5px; float: right; width: 275px;  font-size: .95em; line-height:1.54em;  background: #fff;  }
     #right div.block { margin-bottom:15px; padding:8px 8px 0px 8px; border: 1px solid #e0e0e0; background: #f9f9f9; }
     #right div.blank { background: #ffffff !important; }
     #right span.block { display:block; }
