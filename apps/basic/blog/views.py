@@ -57,18 +57,18 @@ def post_archive_day(request, year, month, day, **kwargs):
 post_archive_day.__doc__ = date_based.archive_day.__doc__
 
 
-def post_detail(request, slug, year, month, day, **kwargs):
-    return date_based.object_detail(
-        request,
-        year = year,
-        month = month,
-        day = day,
-        date_field = 'publish',
-        slug = slug,
-        queryset = Post.objects.published(),
-        **kwargs
+def post_detail(request, slug):
+    post = get_object_or_404(Post,slug=slug,status=2)
+    
+    context = {
+        'object':post,
+    }
+    
+    return render_to_response(
+        'blog/post_detail.html',
+        context,
+        context_instance=RequestContext(request),
     )
-post_detail.__doc__ = date_based.object_detail.__doc__
 
 #def post_detail(request, slug, year, month, day, **kwargs):
 #    return date_based.object_detail(

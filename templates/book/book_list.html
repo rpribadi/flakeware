@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% load tagging_tags %}
+{% load thumbnail %}
 
 {% block content %}
 	{% for book in object_list %}    
@@ -29,7 +30,7 @@
 					{% endfor %}
 				{% endif %} 
 		</h4>	
-        <img src="{{MEDIA_URL}}{{book.image}}" alt="{{book.title}}" />
+        <img src="{% thumbnail project.image 200x200 %}" alt="{{book.title}}" />
 		{{book.tease|safe}}
 	    <p class="more"><a href="{{ book.get_absolute_url }}">Read more</a></p>
     </div>

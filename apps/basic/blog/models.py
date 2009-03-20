@@ -37,7 +37,7 @@ class Post(models.Model):
         (2, _('Public')),
     )
     title           = models.CharField(_('title'), max_length=200)
-    slug            = models.SlugField(_('slug'), unique_for_date='publish')
+    slug            = models.SlugField(_('slug'), unique=True)
     author          = models.ForeignKey(User,related_name="blog_for")
     body            = models.TextField(_('body'))
     tease           = models.TextField(_('tease'), blank=True)
@@ -68,9 +68,6 @@ class Post(models.Model):
     @permalink
     def get_absolute_url(self):
         return ('blog_detail', None, {
-            'year': self.publish.year,
-            'month': self.publish.strftime('%b').lower(),
-            'day': self.publish.day,
             'slug': self.slug
         })
     

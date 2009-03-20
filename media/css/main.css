@@ -81,6 +81,11 @@ h6 { color: #808080; background: inherit; font-weight: normal; font-size: .9em; 
         padding:0;	
 	}
 
+	#left .entries ul, #left .entries ol  {
+        margin:0 0 15px 30px;
+        list-style-position:outside;
+	}
+
     #left blockquote {
         background:#f9f9f9 url(../images/quote.gif) no-repeat scroll 5px 5px;
         border:1px solid #E0E0E0;
