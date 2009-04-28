@@ -8,7 +8,7 @@ from django.conf import settings
 # Note: When you set URL_WWW to settings.MEDIA_URL you can use all your media-files with the FileBrowser.
 # Nevertheless, you may want to limit this to a subdirectory of settings.MEDIA_URL or a seperate media-server.
 # Important: If you change this setting, you should also change PATH_SERVER.
-URL_WWW = getattr(settings, "FILEBROWSER_URL_WWW", '/media/uploads/')
+URL_WWW = getattr(settings, "FILEBROWSER_URL_WWW", 'http://www.flakeware.com/media/uploads/')
 
 # The FileBrowser Admin-URL.
 # Note: If you change this URL, you also have to change the file urls.py.
